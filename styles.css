@@ -24,6 +24,7 @@ nav ul {
     margin: 0;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap; /* To handle wrapping on small screens */
     background-color: #444;
 }
 
@@ -80,4 +81,33 @@ footer {
     padding: 10px;
     background-color: #333;
     color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5rem; /* Adjust header font size for smaller screens */
+    }
+
+    nav ul li a {
+        padding: 10px; /* Reduce padding for better fit */
+        font-size: 0.9rem; /* Adjust font size for mobile */
+    }
+
+    main h2 {
+        font-size: 1.5rem;
+    }
+
+    main p {
+        font-size: 0.9rem;
+    }
+
+    main a {
+        font-size: 0.9rem;
+        padding: 8px 16px; /* Reduce padding for buttons */
+    }
+
+    .template-section {
+        margin: 10px auto; /* Adjust section margins */
+    }
 }
