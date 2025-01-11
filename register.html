@@ -4,195 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Tournament Registration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            position: relative;
-            min-height: 100vh;
-        }
-
-        header {
-            background-color: #0073e6;
-            color: white;
-            padding: 10px 0;
-        }
-
-        header h1 {
-            text-align: center;
-            margin: 0;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            text-align: center;
-            margin: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 10px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        main {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding-bottom: 60px; /* Space for footer */
-        }
-
-        h2 {
-            color: #0073e6;
-        }
-
-        form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        select {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button[type="submit"] {
-            grid-column: 1 / span 2;
-            padding: 10px;
-            background-color: #0073e6;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #005bb5;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            background-color: #000000;
-            color: white;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 40px; /* Height of the footer */
-        }
-
-        @media (max-width: 600px) {
-            nav ul li {
-                display: block;
-                margin: 5px 0;
-            }
-
-            form {
-                grid-template-columns: 1fr;
-            }
-
-            button[type="submit"] {
-                grid-column: 1;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="register.css">
 </head>
-<body>
-    <header>
-        <h1>Register for the Tournament</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="register.html">Register</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="rules.html">Rules</a></li>
-                <li><a href="schedule.html">Schedule</a></li>
-                <li><a href="teams.html">Teams</a></li>
+<body class="body">
+    <header class="header">
+        <h1 class="header-title">Welcome to the Tournament Registration Website</h1>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="register.html" class="nav-link">Register</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="rules.html" class="nav-link">Rules</a></li>
+                <li class="nav-item"><a href="schedule.html" class="nav-link">Schedule</a></li>
+                <li class="nav-item"><a href="teams.html" class="nav-link">Teams</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
-        <section>
-            <h2>Registration Form</h2>
-            <form action="/submit_registration" method="post">
-                <label for="team">Team Name:</label>
-                <input type="text" id="team" name="team" required>
-                
-                <h3>Participant 1</h3>
-                <label for="uid1">Unique ID (UID):</label>
-                <input type="text" id="uid1" name="uid1" required>
-                <label for="name1">Name:</label>
-                <input type="text" id="name1" name="name1" required>
-                <label for="gender1">Gender:</label>
-                <select id="gender1" name="gender1" required>
-                    <option value="">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
+      <section>
+    <h2>Registration Form</h2>
+    <form action="/submit_registration" method="post">
+        <div class="participant">
+        <label for="team" >Team Name:</label>
+        <input type="text" id="team" name="team" required>
+         </div>
 
-                <h3>Participant 2</h3>
-                <label for="uid2">Unique ID (UID):</label>
-                <input type="text" id="uid2" name="uid2" required>
-                <label for="name2">Name:</label>
-                <input type="text" id="name2" name="name2" required>
-                <label for="gender2">Gender:</label>
-                <select id="gender2" name="gender2" required>
-                    <option value="">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
+        <div class="participant">
+            <h3>Participant 1</h3>
+            <label for="uid1">Unique ID (UID):</label>
+            <input type="text" id="uid1" name="uid1" required>
+            <label for="name1">Name:</label>
+            <input type="text" id="name1" name="name1" required>
+            <label for="gender1">Gender:</label>
+            <select id="gender1" name="gender1" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
 
-                <h3>Participant 3</h3>
-                <label for="uid3">Unique ID (UID):</label>
-                <input type="text" id="uid3" name="uid3" required>
-                <label for="name3">Name:</label>
-                <input type="text" id="name3" name="name3" required>
-                <label for="gender3">Gender:</label>
-                <select id="gender3" name="gender3" required>
-                    <option value="">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
+        <div class="participant">
+            <h3>Participant 2</h3>
+            <label for="uid2">Unique ID (UID):</label>
+            <input type="text" id="uid2" name="uid2" required>
+            <label for="name2">Name:</label>
+            <input type="text" id="name2" name="name2" required>
+            <label for="gender2">Gender:</label>
+            <select id="gender2" name="gender2" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
 
-                <h3>Participant 4</h3>
-                <label for="uid4">Unique ID (UID):</label>
-                <input type="text" id="uid4" name="uid4" required>
-                <label for="name4">Name:</label>
-                <input type="text" id="name4" name="name4" required>
-                <label for="gender4">Gender:</label>
-                <select id="gender4" name="gender4" required>
-                    <option value="">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
+        <div class="participant">
+            <h3>Participant 3</h3>
+            <label for="uid3">Unique ID (UID):</label>
+            <input type="text" id="uid3" name="uid3" required>
+            <label for="name3">Name:</label>
+            <input type="text" id="name3" name="name3" required>
+            <label for="gender3">Gender:</label>
+            <select id="gender3" name="gender3" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
 
-                <button type="submit">Submit</button>
-            </form>
-        </section>
+        <div class="participant">
+            <h3>Participant 4</h3>
+            <label for="uid4">Unique ID (UID):</label>
+            <input type="text" id="uid4" name="uid4" required>
+            <label for="name4">Name:</label>
+            <input type="text" id="name4" name="name4" required>
+            <label for="gender4">Gender:</label>
+            <select id="gender4" name="gender4" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</section>
     </main>
     <footer>
         <p>&copy; 2025 Tournament Registration. All rights reserved.</p>
