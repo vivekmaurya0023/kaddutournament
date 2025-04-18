@@ -1,158 +1,220 @@
 /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #121212;
+  color: #f0f0f0;
+  overflow-x: hidden;
+}
+
+/* Header Styling */
+.header {
+  background-color: #1f1f1f;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid orange;
+  animation: slideDown 1s ease-out;
+}
+
+.header-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: orange;
+  margin-bottom: 10px;
+}
+
+/* Navigation Styling */
+.nav {
+  margin-top: 10px;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  animation: slideIn 1.2s ease-out;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.nav-link:hover {
+  background-color: orange;
+  color: black;
+  transform: scale(1.1);
+}
+
+/* Main Section Styling */
+.main {
+  padding: 40px 20px;
+}
+
+.main-heading {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #ffa500;
+  text-align: center;
+  animation: fadeIn 1s ease forwards;
+}
+
+.main-text {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.insta-frame {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  border: 5px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.insta-frame:nth-of-type(2) {
+  animation-delay: 0.3s;
+}
+
+.insta-frame:nth-of-type(3) {
+  animation-delay: 0.6s;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-button {
+  background-color: orange;
+  color: black;
+  font-weight: bold;
+  padding: 12px 24px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+  animation: bounceIn 1s ease;
+}
+
+.main-button:hover {
+  transform: scale(1.05) rotate(-1deg);
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #1f1f1f;
+  padding: 20px;
+  text-align: center;
+  border-top: 2px solid orange;
+  animation: fadeIn 1.5s ease;
+}
+
+.footer-text {
+  color: #ccc;
+  font-size: 0.9rem;
 }
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideDown {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes bounceHover {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-/* Header Styling */
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    animation: slideDown 0.8s ease;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2rem;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.7);
-}
-
-/* Navigation Styling */
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    background-color: #444;
-    animation: slideDown 1s ease;
-}
-
-nav ul li {
-    margin: 0;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: white;
-    padding: 10px 20px;
-    display: block;
-    transition: background-color 0.3s, color 0.3s, transform 0.2s;
-}
-
-nav ul li a:hover {
-    background-color: #ff6347;
-    color: #fff;
-    transform: scale(1.05);
-}
-
-/* Main Section Styling */
-main {
-    padding: 20px;
-    text-align: center;
-    background-color: #f9f9f9;
-    animation: fadeIn 1s ease;
-}
-
-main h2 {
-    font-size: 1.8rem;
-    color: #333;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.7);
-    animation: fadeIn 1s ease 0.2s forwards;
-}
-
-main p {
-    font-size: 1rem;
-    color: #666;
-    animation: fadeIn 1s ease 0.4s forwards;
-}
-
-/* Button */
-.register-btn {
-    text-decoration: none;
-    color: #fff;
-    background-color: #007bff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-    display: inline-block;
-    animation: fadeIn 1s ease 0.6s forwards;
-}
-
-.register-btn:hover {
-    background-color: #0056b3;
-    animation: bounceHover 0.4s;
-}
-
-/* Footer Styling */
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    animation: fadeIn 1.2s ease;
-}
-
-/* Image Animation */
-.insta-frame {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-    border: 5px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+  from {
     opacity: 0;
-    transform: translateY(30px);
-    animation: fadeIn 1s ease forwards;
-    animation-delay: 0.5s;
-    transition: transform 0.3s ease;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.insta-frame:hover {
-    transform: scale(1.03);
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 1.5rem;
-    }
+  .header-title {
+    font-size: 1.5rem;
+  }
 
-    nav ul li a {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
+  .nav-link {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
 
-    main h2 {
-        font-size: 1.5rem;
-    }
+  .main-heading {
+    font-size: 1.5rem;
+  }
 
-    main p {
-        font-size: 0.9rem;
-    }
+  .main-text {
+    font-size: 0.9rem;
+  }
 
-    .register-btn {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-    }
+  .main-button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
 }
