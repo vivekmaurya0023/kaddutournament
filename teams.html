@@ -1,298 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teams - Tournament Registration</title>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Team - Tournament Registration</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
-            color: #333;
-            text-align: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            margin: 0;
-            padding-top: 100px; /* Add space for header */
-            animation: fadeInBody 2s ease-out;
-        }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: #fff;
+      text-align: center;
+      min-height: 100vh;
+      padding-top: 130px;
+      animation: fadeInBody 2s ease-out;
+    }
 
-        /* Header Styling */
-        header {
-            background-color: red;
-            color: white;
-            padding: 15px;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            text-align: center;
-            animation: slideInHeader 1s ease-out;
-            z-index: 100;
-        }
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 20px 0;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      text-align: center;
+      z-index: 100;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      animation: slideInHeader 1s ease-out;
+    }
 
-        h1 {
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-        }
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    }
 
-        h3 {
-            color: white;
-            margin: 20px 0;
-            font-size: 1.5rem;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-        }
+    .team-card {
+      background-color: rgba(0, 0, 0, 0.8);
+      width: 90%;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      animation: fadeInCard 1s ease-out;
+      color: #fff;
+    }
 
-        /* Animated Button Styling */
-        .animated-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-        }
+    .team-card h3 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
 
-        .animated-button:hover {
-            background-color: #0056b3;
-            transform: scale(1.1);
-            box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
-        }
+    .team-card h4 {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      color: #ffcc00;
+    }
 
-        /* Table Styling */
-        table {
-            width: 80%;
-            margin-top: 40px;
-            border-collapse: collapse;
-            animation: fadeInTable 1s ease;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .team-card p {
+      font-size: 1rem;
+      margin: 10px 0;
+      color: #ddd;
+    }
 
-        table, th, td {
-            border: 1px solid #ddd;
-        }
+    .team-card p b {
+      color: #ffcc00;
+    }
 
-        th, td {
-            padding: 15px;
-            text-align: left;
-        }
+    .animated-button {
+      display: inline-block;
+      margin: 30px 15px;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background-color: #28a745;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    }
 
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
+    .animated-button:hover {
+      background-color: #218838;
+      transform: scale(1.1);
+      box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+    }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
+    @keyframes fadeInBody {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
 
-        tr:hover {
-            background-color: #ddd;
-            transform: scale(1.02);
-            transition: 0.3s ease;
-        }
+    @keyframes slideInHeader {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
 
-        /* Keyframes for Animations */
-        @keyframes fadeInBody {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideInHeader {
-            0% {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInTable {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    @keyframes fadeInCard {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>2ND TOURNAMENT REGISTERED TEAMS</h1>
-    </header>
+  <header>
+    <h1>New Team - Tournament Registration</h1>
+  </header>
 
-    <div style="margin-top: 160px;">
-        <h3>1. TEAM ROYAL</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>ID</th>
-            </tr>
-            <tr>
-                <td>ＲＴ•ＦＲＯＳＴＹ⛄</td>
-                <td>2608605866</td>
-            </tr>
-            <tr>
-                <td>Rt᭄Ꮲʀɪ֟፝ʏᴀᥫ᭡</td>
-                <td>2530467021</td>
-            </tr>
-            <tr>
-                <td>ＲＴ• N O O B⛄</td>
-                <td>702068439</td>
-            </tr>
-            <tr>
-                <td>₦₲ TERROR¹¹¹</td>
-                <td>1909055982</td>
-            </tr>
-        </table>
+  <div class="team-card">
+    <h3>Team Name: active shooters</h3>
+    <h4>Team Leader: Ashish</h4>
+    <p><b>Team UID:</b> 16747978857</p>
+    <p>This team is one of the strongest contenders in the upcoming tournament. They have proven their skills in previous games and are ready for the challenge!</p>
+  </div>
 
-        <h3>2. NG ARMY</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>ID</th>
-            </tr>
-            <tr>
-                <td>NG NISHA</td>
-                <td>1912192448</td>
-            </tr>
-            <tr>
-                <td>NG EMPEROR</td>
-                <td>2528231866</td>
-            </tr>
-            <tr>
-                <td>NG ABHI</td>
-                <td>2954838470</td>
-            </tr>
-            <tr>
-                <td>₦NG CHACHAL</td>
-                <td>2384451776</td>
-            </tr>
-        </table>
+  <div class="team-card">
+    <h3>Team Name: ꧁❦King࿐꧂</h3>
+    <h4>Team Leader: ꧁❦AjitKing࿐꧂</h4>
+    <p><b>Team UID:</b> 1649329303</p>
+    <p>This team is one of the strongest contenders in the upcoming tournament. They have proven their skills in previous games and are ready for the challenge!</p>
+  </div>
 
-        <h3>3. Team Brothers</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>ID</th>
-            </tr>
-            <tr>
-                <td>Haryana Jod</td>
-                <td>1720890424</td>
-            </tr>
-            <tr>
-                <td>Flash</td>
-                <td>2341051693</td>
-            </tr>
-            <tr>
-                <td>Harsh Rana</td>
-                <td>385967650</td>
-            </tr>
-            <tr>
-                <td>Haryana Udit</td>
-                <td>1917980006</td>
-            </tr>
-        </table>
+  <div class="team-card">
+    <h3>Team Name: Pethro gamerz</h3>
+    <h4>Team Leader: DNSLAYERS™</h4>
+    <p><b>Team UID:</b> 5757340630</p>
+    <p>This team is one of the strongest contenders in the upcoming tournament. They have proven their skills in previous games and are ready for the challenge!</p>
+  </div>
 
-        <h3>4. Hath Aya Par Mu Na Laga</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>ID</th>
-            </tr>
-            <tr>
-                <td>DEVANSH</td>
-                <td>1654016468</td>
-            </tr>
-            <tr>
-                <td>RITESH</td>
-                <td>2872905597</td>
-            </tr>
-            <tr>
-                <td>Mad Genius</td>
-                <td>25489648561</td>
-            </tr>
-            <tr>
-                <td>VINAY</td>
-                <td>1649329303</td>
-            </tr>
-        </table>
+  <div class="team-card">
+    <h3>Team Name: The Empire</h3>
+    <h4>Team Leader: NG EMPEROR</h4>
+    <p><b>Team UID:</b> 2528231866</p>
+    <p>This team is one of the strongest contenders in the upcoming tournament. They have proven their skills in previous games and are ready for the challenge!</p>
+  </div>
 
-        <h3>5. ACTIVE SHOOTER</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>ID</th>
-            </tr>
-            <tr>
-                <td>Ashish</td>
-                <td>35214563215</td>
-            </tr>
-            <tr>
-                <td>Ashish</td>
-                <td>2456205597</td>
-            </tr>
-            <tr>
-                <td>Prakash</td>
-                <td>25468532125</td>
-            </tr>
-            <tr>
-                <td>Ritik</td>
-                <td>13245678543</td>
-            </tr>
-        </table>
+  <div class="team-card">
+    <h3>Team Name: ᶜʳᵃᶻʸplayer⁰</h3>
+    <h4>Team Leader: ᶜʳᵃᶻʸritesh⁰</h4>
+    <p><b>Team UID:</b> 2872905597</p>
+    <p>This team is one of the strongest contenders in the upcoming tournament. They have proven their skills in previous games and are ready for the challenge!</p>
+  </div>
 
-        <h3>6. Jsr eSports</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>ID</th>
-            </tr>
-            <tr>
-                <td>Ansh</td>
-                <td>4508960770</td>
-            </tr>
-            <tr>
-                <td>Harsh</td>
-                <td>574666152</td>
-            </tr>
-            <tr>
-                <td>Anuj</td>
-                <td>2366693396</td>
-            </tr>
-            <tr>
-                <td>Abhishek</td>
-                <td>2900966994</td>
-            </tr>
-        </table>
+  <div class="team-card">
+    <h3>Team Name: WARRIORS</h3>
+    <h4>Team Leader: DANGER ABHI</h4>
+    <p><b>Team UID:</b> 2009265398</p>
+    <p>This team is one of the strongest contenders in the upcoming tournament. They have proven their skills in previous games and are ready for the challenge!</p>
+  </div>
 
-        <h3><b>REGISTER FAST</b></h3>
-        <button class="animated-button" onclick="window.location.href='1ST.HTML'">FIRST TOURNAMENT TEAMS</button>
-    </div>
+  <div class="team-card">
+    <h3>Team Name: UP WARRIORS</h3>
+    <h4>Team Leader: YASIR</h4>
+    <p><b>Team UID:</b> 3179904297</p>
+    <p>This team is one of the strongest contenders in the upcoming tournament. They have proven their skills in previous games and are ready for the challenge!</p>
+  </div>
+
+  <div class="team-card">
+    <h3>Team Name: ROYAL TEAM</h3>
+    <h4>Team Leader: ꧁༒ⓈⒽⒾⓋⒶⓜ༒꧂</h4>
+    <p><b>Team UID:</b> 7136548376</p>
+    <p>This team is one of the strongest contenders in the upcoming tournament. They have proven their skills in previous games and are ready for the challenge!</p>
+  </div>
+
+  <div class="team-card">
+    <h3>Team Name: ƝRX メ ESPORT  メ</h3>
+    <h4>Team Leader: ZORASTER</h4>
+    <p><b>Team UID:</b> 1568445690</p>
+    <p>This team is one of the strongest contenders in the upcoming tournament. They have proven their skills in previous games and are ready for the challenge!</p>
+  </div>
+
+  <div class="team-card">
+    <h3>Team Name: K_G_F_GAMING</h3>
+    <h4>Team Leader: K_G_F_SAMEER</h4>
+    <p><b>Team UID:</b> 2722475455</p>
+    <p>This team is one of the strongest contenders in the upcoming tournament. They have proven their skills in previous games and are ready for the challenge!</p>
+  </div>
+
+  <button class="animated-button" onclick="window.location.href='firstour.HTML'">FIRST TOURNAMENT TEAMS</button>
+  <button class="animated-button" onclick="window.location.href='sectour.HTML'">SECOND TOURNAMENT TEAMS</button>
+  <button class="animated-button" onclick="window.location.href='index.html'">Back to Home</button>
 </body>
 </html>
