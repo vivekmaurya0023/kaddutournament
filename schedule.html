@@ -5,6 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule - Tournament Registration</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            animation: slideDown 1s ease-out;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.7);
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            display: block;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+        }
+
+        nav ul li a:hover {
+            background-color: #ff6347;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            animation: fadeIn 1s ease;
+        }
+
+        main h2 {
+            font-size: 2rem;
+            color: #333;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.7);
+        }
+
+        main p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            color: orange;
+            margin-top: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            animation: fadeIn 1s ease;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,7 +127,6 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                
                 <li><a href="about.html">About</a></li>
                 <li><a href="rules.html">Rules</a></li>
                 <li><a href="schedule.html">Schedule</a></li>
@@ -20,15 +134,41 @@
             </ul>
         </nav>
     </header>
+
     <main>
         <section>
-            <h2>2ND FREE TOURNAMENT</h2>
-            <p><b>9/02/2025</b></p>
-            <p><b>12:00 PM </b></p>
+            <h2>3RD FREE TOURNAMENT</h2>
+            <p><b>21/04/2025</b></p>
+            <p><b>4:00 PM</b></p>
+            <div class="countdown" id="countdown"></div>
         </section>
     </main>
+
     <footer>
         <p>&copy; 2025 Tournament Registration. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Countdown Timer Script
+        function updateCountdown() {
+            const eventDate = new Date('April 21, 2025 16:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "Event Started!";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);  // Update countdown every second
+    </script>
 </body>
 </html>
