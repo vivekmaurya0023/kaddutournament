@@ -1,55 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rules - Tournament Registration</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .rules-section {
-      padding: 20px;
-      text-align: left;
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      animation: fadeIn 1s ease;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Rules - Crazy Kaddu Tournament</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. CORE SETUP (Consistent Theme) --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .rules-section h2 {
-      text-align: center;
-      font-size: 2rem;
-      color: #333;
-      margin-bottom: 20px;
-    }
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+                url('https://img.freepik.com/free-vector/dark-hexagonal-background-with-gradient-color_79603-1409.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
 
-    .rules-section ol {
-      padding-left: 20px;
-      font-size: 1.1rem;
-      color: #444;
-    }
+        /* --- 2. HEADER & NAV --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #00f3ff;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .rules-section li {
-      margin-bottom: 15px;
-      line-height: 1.6;
-      transition: transform 0.3s;
-    }
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #00f3ff;
+            text-shadow: 0 0 10px #00f3ff;
+            font-weight: 900;
+            margin: 0;
+        }
 
-    .rules-section li:hover {
-      transform: translateX(5px);
-      color: #007bff;
-    }
-  </style>
+        .nav-list { display: flex; gap: 20px; list-style: none; }
+
+        .nav-link {
+            text-decoration: none;
+            color: #ccc;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #fff;
+            text-shadow: 0 0 10px #00f3ff;
+        }
+
+        /* --- 3. MAIN RULES CONTAINER --- */
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .rules-container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(10, 20, 30, 0.6);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #ff0055, -2px -2px 0px #00f3ff;
+            animation: glitchAnim 3s infinite;
+        }
+
+        /* --- 4. STYLED RULE LIST --- */
+        .rules-list {
+            list-style: none;
+            counter-reset: rule-counter;
+        }
+
+        .rule-item {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 5px solid #00f3ff; /* Default Blue Border */
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Red Border for Danger Rules */
+        .rule-item.danger {
+            border-left-color: #ff0055;
+        }
+
+        .rule-item:hover {
+            transform: translateX(10px);
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+        }
+
+        .rule-item.danger:hover {
+            background: rgba(255, 0, 85, 0.1);
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.2);
+        }
+
+        /* Number Box */
+        .rule-item::before {
+            counter-increment: rule-counter;
+            content: "0" counter(rule-counter);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #888;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 5px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .rule-item:hover::before {
+            color: #fff;
+            background: #00f3ff;
+        }
+
+        .rule-item.danger:hover::before {
+            background: #ff0055;
+        }
+
+        /* Text Styling */
+        .rule-content h3 {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .rule-content p {
+            color: #ccc;
+            font-size: 1rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #555;
+            background: black;
+            border-top: 1px solid #111;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glitchAnim {
+            0% { text-shadow: 2px 2px 0px #ff0055, -2px -2px 0px #00f3ff; }
+            50% { text-shadow: 2px -2px 0px #ff0055, -2px 2px 0px #00f3ff; }
+            100% { text-shadow: 2px 2px 0px #ff0055, -2px -2px 0px #00f3ff; }
+        }
+
+        /* Mobile Fix */
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .nav-list { flex-wrap: wrap; justify-content: center; }
+            .rule-item { flex-direction: column; text-align: center; align-items: center; }
+            .rule-item::before { margin-bottom: 10px; }
+        }
+    </style>
 </head>
 <body>
+
   <header>
-    <h1>Tournament Rules & Regulations</h1>
-     <nav class="nav">
+    <h1 class="header-title">CRAZY KADDU</h1>
+    <nav class="nav">
       <ul class="nav-list">
         <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="rules.html" class="nav-link">Rules</a></li>
+        <li class="nav-item"><a href="rules.html" class="nav-link active">Rules</a></li>
         <li class="nav-item"><a href="schedule.html" class="nav-link">Schedule</a></li>
         <li class="nav-item"><a href="teams.html" class="nav-link">Teams</a></li>
       </ul>
@@ -57,20 +218,53 @@
   </header>
 
   <main>
-    <section class="rules-section">
-      <h2>📜 General Rules</h2>
-      <ol>
-        <li>🎮 <strong>Minimum Level Requirement:</strong> Player must be at least <strong>Level 40</strong> to participate.</li>
-        <li>🚫 <strong>No Hacks Allowed:</strong> Use of any kind of hacks or third-party tools will result in <strong>immediate disqualification</strong>.</li>
-        <li>⚠️ <strong>Cheating is Strictly Prohibited:</strong> Any kind of unfair gameplay or cheat methods are <strong>not allowed</strong>.</li>
-        <li>🔫 <strong>Gun Attributes:</strong> Custom gun attributes are <strong>not allowed</strong> during the tournament.</li>
-        <li>🧙 <strong>Character Skills:</strong> Character skills are <strong>allowed</strong> and can be used strategically.</li>
-      </ol>
-    </section>
+    <div class="rules-container">
+      <h2 class="section-title">📜 Protocols & Regulations</h2>
+
+      <div class="rules-list">
+        
+        <div class="rule-item">
+            <div class="rule-content">
+                <h3>🎮 Minimum Level Requirement</h3>
+                <p>Player must be at least <strong>Level 40</strong> to participate in the battleground.</p>
+            </div>
+        </div>
+
+        <div class="rule-item danger">
+            <div class="rule-content">
+                <h3>🚫 Zero Tolerance Policy</h3>
+                <p>Use of hacks, scripts, or third-party tools will result in <strong>IMMEDIATE DISQUALIFICATION</strong>.</p>
+            </div>
+        </div>
+
+        <div class="rule-item danger">
+            <div class="rule-content">
+                <h3>⚠️ Fair Play Only</h3>
+                <p>Teaming up with enemies or using glitches is strictly <strong>PROHIBITED</strong>.</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-content">
+                <h3>🔫 Gun Attributes</h3>
+                <p>Custom gun attributes (skins) are <strong>NOT ALLOWED</strong>. Default stats only.</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-content">
+                <h3>🧙 Character Skills</h3>
+                <p>Character skills (Active/Passive) are <strong>ALLOWED</strong>. Plan your strategy wisely!</p>
+            </div>
+        </div>
+
+      </div>
+    </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Tournament Registration. All rights reserved.</p>
+    <p>&copy; 2025 Crazy Kaddu Tournament. All rights reserved.</p>
   </footer>
+
 </body>
 </html>
