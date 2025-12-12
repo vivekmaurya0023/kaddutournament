@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Registration</title>
+    <style>
+        /* --- GENERAL SETTINGS --- */
+        body { margin: 0; padding: 0; background-color: #050505; color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        .main-container { width: 100%; max-width: 400px; text-align: center; padding: 20px; animation: slideUp 1s ease-out; }
+        
+        /* --- ANIMATED TITLE --- */
+        .title { font-size: 2.5rem; text-transform: uppercase; font-weight: bold; letter-spacing: 3px; margin-bottom: 20px; color: #fff; text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4500, 0 0 40px #ff0000; animation: textGlow 1.5s infinite alternate; }
+        
+        /* --- IMAGE WITH FIRE BORDER --- */
+        .image-box { width: 150px; height: 150px; margin: 0 auto 30px auto; border-radius: 50%; overflow: hidden; position: relative; box-shadow: 0 0 20px #ff0000, 0 0 40px #ff4500, 0 0 60px #ffcc00; animation: flamePulse 0.8s infinite alternate; border: 4px solid white; }
+        .image-box img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* --- FORM CONTAINER --- */
+        .form-box { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 30px; border-radius: 15px; border: 1px solid rgba(255, 0, 0, 0.3); box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); }
+        .input-group { position: relative; margin-bottom: 25px; text-align: left; }
+        .input-group label { color: #ccc; font-size: 0.9rem; margin-bottom: 5px; display: block; }
+        .input-group input { width: 100%; padding: 12px; background: transparent; border: none; border-bottom: 2px solid #555; color: white; font-size: 1rem; outline: none; transition: 0.4s; box-sizing: border-box; }
+        .input-group input:focus { border-bottom: 2px solid #ff4500; box-shadow: 0 10px 10px -10px rgba(255, 69, 0, 0.5); }
+        
+        /* --- SUBMIT BUTTON --- */
+        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(45deg, #ff0000, #ff4500); border: none; color: white; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; cursor: pointer; border-radius: 30px; box-shadow: 0 0 15px #ff4500; transition: 0.3s; }
+        .btn-submit:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
+        
+        /* --- ANIMATIONS --- */
+        @keyframes textGlow { from { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4500; } to { text-shadow: 0 0 20px #ff0000, 0 0 40px #ff4500, 0 0 60px #ffcc00; } }
+        @keyframes flamePulse { 0% { box-shadow: 0 0 15px #ff0000, 0 0 30px #ff4500; border-color: #fff; } 100% { box-shadow: 0 0 35px #ff0000, 0 0 60px #ffcc00, 0 0 80px orange; border-color: #ffcc00; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h1 class="title">FREE FIRE <br>TOURNAMENT</h1>
+
+        <div class="image-box">
+            <img src="https://cdn-icons-png.flaticon.com/512/3408/3408506.png" alt="Tournament Logo">
+        </div>
+
+        <div class="form-box">
+            <form id="tourneyForm">
+                
+                <div class="input-group">
+                    <label>Team Name</label>
+                    <input type="text" id="teamName" placeholder="Enter Team Name" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Leader's UID</label>
+                    <input type="number" id="leaderUID" placeholder="Example: 12345678" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Leader's In-Game Name</label>
+                    <input type="text" id="leaderName" placeholder="Example: Killer_007" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Join Battle</button>
+
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Functions (Using CDN URLs for Browser Compatibility)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // TERA CONFIGURATION
+        const firebaseConfig = {
+            apiKey: "AIzaSyC87FgEFqiU-Hxly57h_E1eQfutn2yp6ik",
+            authDomain: "freefire-tournament-8de8c.firebaseapp.com",
+            projectId: "freefire-tournament-8de8c",
+            storageBucket: "freefire-tournament-8de8c.firebasestorage.app",
+            messagingSenderId: "718786943416",
+            appId: "1:718786943416:web:403b061404c88b0261d74d",
+            measurementId: "G-10BF83YEY5"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase(app); // Database start kiya
+
+        // Submit Button Logic
+        document.getElementById('tourneyForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Page refresh hone se rokega
+
+            // Values Get Karna
+            var team = document.getElementById('teamName').value;
+            var uid = document.getElementById('leaderUID').value;
+            var name = document.getElementById('leaderName').value;
+
+            // Database Me Save Karna
+            const newRegistrationRef = push(ref(db, 'registrations'));
+            set(newRegistrationRef, {
+                TeamName: team,
+                LeaderUID: uid,
+                LeaderName: name,
+                Timestamp: new Date().toString()
+            })
+            .then(() => {
+                alert("Registration Successful! Welcome to the Battle.");
+                document.getElementById('tourneyForm').reset(); // Form clear
+            })
+            .catch((error) => {
+                alert("Error: " + error.message);
+            });
+        });
+    </script>
+
+</body>
+</html>
