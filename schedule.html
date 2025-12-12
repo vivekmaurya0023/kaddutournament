@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tournament Schedule - Elite</title>
+    <title>Teams - Elite Tournament</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -13,12 +13,11 @@
         body {
             background-color: #050505;
             color: white;
-            font-family: 'Rajdhani', sans-serif; /* Tech Font */
+            font-family: 'Rajdhani', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
-            /* Cool Grid Background */
             background-image: 
                 linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
                 url('https://img.freepik.com/free-vector/dark-hexagonal-background-with-gradient-color_79603-1409.jpg');
@@ -53,6 +52,8 @@
             display: flex;
             gap: 20px;
             list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
         .nav a {
@@ -64,6 +65,7 @@
             padding: 5px 10px;
             transition: 0.3s;
             position: relative;
+            white-space: nowrap; /* Text ko tutne se rokega */
         }
 
         .nav a:hover, .nav a.active {
@@ -79,7 +81,7 @@
             box-shadow: 0 0 10px #00f3ff;
         }
 
-        /* --- 3. MAIN CARD (GLASSMORPHISM) --- */
+        /* --- 3. MAIN CARD --- */
         main {
             flex: 1;
             display: flex;
@@ -96,13 +98,12 @@
             text-align: center;
             max-width: 800px;
             width: 100%;
-            backdrop-filter: blur(20px); /* Blur Effect */
+            backdrop-filter: blur(20px);
             box-shadow: 0 0 50px rgba(0, 243, 255, 0.1), inset 0 0 20px rgba(0, 0, 0, 0.5);
             animation: floatCard 4s ease-in-out infinite;
             position: relative;
         }
 
-        /* --- 4. GLITCH TEXT EFFECT --- */
         .glitch-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 3rem;
@@ -123,22 +124,21 @@
             text-transform: uppercase;
         }
 
-        /* --- 5. NEON HOURGLASS (Advanced CSS) --- */
+        /* --- 5. NEON HOURGLASS --- */
         .neon-hourglass {
             position: relative;
             width: 80px;
-            height: 100px; /* Thoda lamba shape */
+            height: 100px;
             margin: 0 auto 40px auto;
-            border: 3px solid #ffaa00; /* Gold Border */
+            border: 3px solid #ffaa00;
             border-radius: 5px;
             box-shadow: 0 0 15px #ffaa00, inset 0 0 10px #ffaa00;
-            clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%, 50% 50%); /* Hourglass Shape Cut */
+            clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%, 50% 50%);
             background: rgba(255, 170, 0, 0.1);
             animation: rotateNeon 3s infinite ease-in-out;
             overflow: hidden;
         }
 
-        /* Ret (Sand) Animation */
         .neon-hourglass::after {
             content: '';
             position: absolute;
@@ -187,34 +187,6 @@
             display: block;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes floatCard {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes rotateNeon {
-            0% { transform: rotate(0deg); }
-            45% { transform: rotate(0deg); }
-            50% { transform: rotate(180deg); }
-            95% { transform: rotate(180deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes sandFlow {
-            0% { top: -50%; }
-            50% { top: 0%; }
-            100% { top: 50%; }
-        }
-
-        @keyframes glitchAnim {
-            0% { text-shadow: 2px 2px 0px #ff0055, -2px -2px 0px #00f3ff; }
-            25% { text-shadow: -2px 2px 0px #ff0055, 2px -2px 0px #00f3ff; }
-            50% { text-shadow: 2px -2px 0px #ff0055, -2px 2px 0px #00f3ff; }
-            75% { text-shadow: -2px -2px 0px #ff0055, 2px 2px 0px #00f3ff; }
-            100% { text-shadow: 2px 2px 0px #ff0055, -2px -2px 0px #00f3ff; }
-        }
-
         /* --- FOOTER --- */
         footer {
             text-align: center;
@@ -224,12 +196,40 @@
             background: black;
             border-top: 1px solid #111;
         }
-        
-        /* Mobile Fix */
+
+        /* --- ANIMATIONS --- */
+        @keyframes floatCard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes rotateNeon { 0% { transform: rotate(0deg); } 45% { transform: rotate(0deg); } 50% { transform: rotate(180deg); } 95% { transform: rotate(180deg); } 100% { transform: rotate(360deg); } }
+        @keyframes sandFlow { 0% { top: -50%; } 50% { top: 0%; } 100% { top: 50%; } }
+        @keyframes glitchAnim { 0% { text-shadow: 2px 2px 0px #ff0055, -2px -2px 0px #00f3ff; } 25% { text-shadow: -2px 2px 0px #ff0055, 2px -2px 0px #00f3ff; } 50% { text-shadow: 2px -2px 0px #ff0055, -2px 2px 0px #00f3ff; } 75% { text-shadow: -2px -2px 0px #ff0055, 2px 2px 0px #00f3ff; } 100% { text-shadow: 2px 2px 0px #ff0055, -2px -2px 0px #00f3ff; } }
+
+        /* --- ⚠️ MOBILE FIX IS HERE ⚠️ --- */
         @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 10px;
+            }
+
+            .logo {
+                margin-bottom: 5px;
+            }
+
+            .nav ul {
+                flex-wrap: wrap; /* Isse items niche wali line me aa jayenge */
+                justify-content: center; /* Beech me rahenge */
+                gap: 10px; /* Gap kam kiya taaki fit ho */
+            }
+
+            .nav a {
+                font-size: 0.9rem; /* Font thoda chota kiya */
+                padding: 5px 8px; /* Padding kam ki */
+            }
+
             .glitch-title { font-size: 2rem; }
             .glass-panel { padding: 20px; }
-            header { flex-direction: column; gap: 10px; }
+            .time-box { padding: 10px; }
+            .number { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -240,9 +240,8 @@
         <nav class="nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                 <li><a href="about.html">About</a></li>
-                  <li><a href="rules.html">Rules</a></li>
-
+                <li><a href="about.html">About</a></li>
+                <li><a href="rules.html">Rules</a></li>
                 <li><a href="schedule.html">Schedule</a></li>
                 <li><a href="teams.html" class="active">Teams</a></li>
             </ul>
@@ -308,11 +307,10 @@
             if (diff < 0) {
                 clearInterval(timer);
                 document.querySelector(".timer-grid").innerHTML = "<h2 style='color:#00f3ff; font-size:2rem; grid-column: span 4;'>BATTLE STARTED!</h2>";
-                document.querySelector(".neon-hourglass").style.borderColor = "#00f3ff"; // Change color to Blue
+                document.querySelector(".neon-hourglass").style.borderColor = "#00f3ff";
             }
         }, 1000);
     </script>
 
 </body>
 </html>
-
