@@ -1,18 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home - Tournament Registration</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet"> 
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Home - Crazy Kaddu Tournament</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. CORE SETUP (Same as Schedule Page) --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            /* Cool Grid Background */
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+                url('https://img.freepik.com/free-vector/dark-hexagonal-background-with-gradient-color_79603-1409.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        /* --- 2. NAVIGATION BAR --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #00f3ff;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #00f3ff;
+            text-shadow: 0 0 10px #00f3ff;
+            font-weight: 900;
+            margin: 0;
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #ccc;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #fff;
+            text-shadow: 0 0 10px #00f3ff;
+        }
+
+        /* --- 3. MAIN GLASS PANEL --- */
+        .main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .main-section {
+            background: rgba(10, 20, 30, 0.6);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.1);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        /* --- 4. TEXT STYLES --- */
+        .main-heading {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: white;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #ff0055, -2px -2px 0px #00f3ff;
+            margin-bottom: 10px;
+            animation: glitchAnim 3s infinite;
+        }
+
+        .main-text {
+            color: #00f3ff;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- 5. REGISTER BUTTON (Pulsing Effect) --- */
+        .btn-container {
+            margin: 40px 0;
+        }
+
+        .main-button {
+            background: linear-gradient(45deg, #ff0055, #ff4500);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 0 20px #ff0055;
+            transition: 0.3s;
+            display: inline-block;
+            border: 2px solid white;
+            animation: pulseBtn 2s infinite;
+        }
+
+        .main-button:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #00f3ff, #0066ff);
+            box-shadow: 0 0 30px #00f3ff;
+            border-color: #00f3ff;
+        }
+
+        /* --- 6. IMAGE GALLERY (Grid System) --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .insta-frame {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #00f3ff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            transition: 0.4s;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .insta-frame:hover {
+            transform: scale(1.05) rotate(2deg);
+            opacity: 1;
+            box-shadow: 0 0 25px #00f3ff, 0 0 50px #00f3ff;
+            z-index: 10;
+        }
+
+        /* Main featured image */
+        .featured-img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            border: 3px solid #ffaa00;
+            box-shadow: 0 0 30px #ffaa00;
+            margin-bottom: 20px;
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #555;
+            background: black;
+            border-top: 1px solid #111;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes glitchAnim {
+            0% { text-shadow: 2px 2px 0px #ff0055, -2px -2px 0px #00f3ff; }
+            50% { text-shadow: 2px -2px 0px #ff0055, -2px 2px 0px #00f3ff; }
+            100% { text-shadow: 2px 2px 0px #ff0055, -2px -2px 0px #00f3ff; }
+        }
+
+        @keyframes pulseBtn {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 85, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 0, 85, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 85, 0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Fix */
+        @media (max-width: 600px) {
+            header { flex-direction: column; gap: 15px; }
+            .nav-list { flex-wrap: wrap; justify-content: center; }
+            .main-heading { font-size: 2rem; }
+            .gallery { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
+
   <header class="header">
-    <h1 class="header-title">CRAZY KADDU GAMER'S TOURNAMENT</h1>
+    <h1 class="header-title">CRAZY KADDU</h1>
     <nav class="nav">
       <ul class="nav-list">
-        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
         <li class="nav-item"><a href="rules.html" class="nav-link">Rules</a></li>
         <li class="nav-item"><a href="schedule.html" class="nav-link">Schedule</a></li>
@@ -22,27 +231,30 @@
   </header>
 
   <main class="main">
-    <section class="main-section center-content">
+    <section class="main-section">
+      
       <h2 class="main-heading">Sunday Tournament</h2>
-      <p class="main-text">Welcome to Kaddu's Web Site!</p>
+      <p class="main-text">Welcome to Kaddu's Gaming Arena!</p>
 
-      <img src="TOUR4 .png" class="insta-frame" alt="Tournament Image 2">
+      <img src="TOUR4 .png" class="featured-img" alt="Main Tournament Image">
       
-      <a href="tour.html" class="main-button">Register Now</a>
-      
+      <div class="btn-container">
+        <a href="tour.html" class="main-button">🚀 Register Now</a>
+      </div>
 
-      <img src="TOUR3 (2).png" class="insta-frame" alt="Tournament Image 2">
-      <img src="TOUR2.png" class="insta-frame" alt="Tournament Image 2">
-      <img src="TOUR1.png" class="insta-frame" alt="Tournament Image 2">
-      
-     
+      <div class="gallery">
+        <img src="TOUR3 (2).png" class="insta-frame" alt="Gaming Moment 1">
+        <img src="TOUR2.png" class="insta-frame" alt="Gaming Moment 2">
+        <img src="TOUR1.png" class="insta-frame" alt="Gaming Moment 3">
+        <img src="TOUR4 .png" class="insta-frame" alt="Gaming Moment 4"> 
+      </div>
+
     </section>
   </main>
 
   <footer class="footer">
-    <p class="footer-text">&copy; 2025 Tournament Registration. All rights reserved.</p>
+    <p class="footer-text">&copy; 2025 Crazy Kaddu Tournament. All rights reserved.</p>
   </footer>
+
 </body>
 </html>
-
-
