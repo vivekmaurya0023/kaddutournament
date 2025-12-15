@@ -3,13 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>New Team - Tournament Registration</title>
+  <title>Tournament Teams List</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Arial', sans-serif;
@@ -18,6 +14,7 @@
       text-align: center;
       min-height: 100vh;
       padding-top: 130px;
+      padding-bottom: 50px;
       animation: fadeInBody 2s ease-out;
     }
 
@@ -28,7 +25,6 @@
       width: 100%;
       position: fixed;
       top: 0;
-      text-align: center;
       z-index: 100;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       animation: slideInHeader 1s ease-out;
@@ -42,98 +38,289 @@
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
     }
 
+    /* CARD DESIGN WITH IMAGE */
     .team-card {
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
       width: 90%;
-      max-width: 600px;
+      max-width: 700px;
       margin: 30px auto;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       animation: fadeInCard 1s ease-out;
       color: #fff;
+      
+      /* Flexbox for Side-by-Side Layout */
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    .card-info {
+        flex: 1;
+        padding-right: 20px;
     }
 
     .team-card h3 {
-      font-size: 2rem;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+      color: #fff;
+      text-transform: uppercase;
     }
 
     .team-card h4 {
-      font-size: 1.5rem;
-      margin: 20px 0;
+      font-size: 1.2rem;
+      margin: 5px 0;
       color: #ffcc00;
     }
 
     .team-card p {
       font-size: 1rem;
-      margin: 10px 0;
+      margin: 5px 0;
       color: #ddd;
     }
 
-    .team-card p b {
-      color: #ffcc00;
+    .team-card p b { color: #00ffcc; }
+
+    /* IMAGE SECTION STYLES */
+    .card-image {
+        text-align: center;
+        min-width: 120px;
     }
 
+    .payment-label {
+        display: block;
+        font-size: 0.8rem;
+        color: #aaa;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    .payment-img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border: 2px solid #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .payment-img:hover {
+        transform: scale(1.1);
+        border-color: #ffcc00;
+    }
+
+    /* Responsive Mobile View */
+    @media (max-width: 600px) {
+        .team-card {
+            flex-direction: column;
+            text-align: center;
+        }
+        .card-info { padding-right: 0; margin-bottom: 20px; }
+    }
+
+    /* BUTTONS */
     .animated-button {
       display: inline-block;
-      margin: 30px 15px;
+      margin: 20px 10px;
       padding: 15px 30px;
       font-size: 18px;
       font-weight: bold;
       color: white;
       background-color: #28a745;
       border: none;
-      border-radius: 5px;
+      border-radius: 30px;
       cursor: pointer;
       transition: all 0.3s ease-in-out;
       box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
     }
+    .animated-button:hover { background-color: #218838; transform: scale(1.05); }
 
-    .animated-button:hover {
-      background-color: #218838;
-      transform: scale(1.1);
-      box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
-    }
+    /* MODAL FOR IMAGE ZOOM */
+    #imgModal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); justify-content: center; align-items: center; }
+    #fullImage { max-width: 90%; max-height: 90%; border: 3px solid white; box-shadow: 0 0 20px #ffcc00; }
+    .close-btn { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
 
-    @keyframes fadeInBody {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    @keyframes slideInHeader {
-      0% {
-        transform: translateY(-50px);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeInCard {
-      0% {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    @keyframes fadeInBody { 0% { opacity: 0; } 100% { opacity: 1; } }
+    @keyframes slideInHeader { 0% { transform: translateY(-50px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+    @keyframes fadeInCard { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
+
   <header>
-    <h1> Tournament Registration</h1>
+    <h1>📋 Registered Teams</h1>
   </header>
 
+  <div class="team-card">
+    <div class="card-info">
+        <h3>CRAZY PLAYER </h3>
+        <h4>Leader: CRAZY AMIBA </h4>
+        <p><b>UID:</b>570411093</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment1.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>
 
-  <button class="animated-button" onclick="window.location.href='ADMIN.html'">CURRENT LIST </button>
+<!-- <div class="team-card">
+    <div class="card-info">
+        <h3>꧁❦King࿐꧂</h3>
+        <h4>Leader: ꧁❦AjitKing࿐꧂</h4>
+        <p><b>UID:</b> 1649329303</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment2.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="card-info">
+        <h3>Pethro gamerz</h3>
+        <h4>Leader: DNSLAYERS™</h4>
+        <p><b>UID:</b> 5757340630</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment3.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="card-info">
+        <h3>The Empire</h3>
+        <h4>Leader: NG EMPEROR</h4>
+        <p><b>UID:</b> 2528231866</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment4.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="card-info">
+        <h3>ᶜʳᵃᶻʸplayer⁰</h3>
+        <h4>Leader: ᶜʳᵃᶻʸritesh⁰</h4>
+        <p><b>UID:</b> 2872905597</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment5.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="card-info">
+        <h3>WARRIORS</h3>
+        <h4>Leader: DANGER ABHI</h4>
+        <p><b>UID:</b> 2009265398</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment6.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="card-info">
+        <h3>UP WARRIORS</h3>
+        <h4>Leader: YASIR</h4>
+        <p><b>UID:</b> 3179904297</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment7.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="card-info">
+        <h3>ROYAL TEAM</h3>
+        <h4>Leader: ꧁༒ⓈⒽⒾⓋⒶⓜ༒꧂</h4>
+        <p><b>UID:</b> 7136548376</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment8.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="card-info">
+        <h3>ƝRX メ ESPORT</h3>
+        <h4>Leader: ZORASTER</h4>
+        <p><b>UID:</b> 1568445690</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment9.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="card-info">
+        <h3>K_G_F_GAMING</h3>
+        <h4>Leader: K_G_F_SAMEER</h4>
+        <p><b>UID:</b> 2722475455</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment10.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="card-info">
+        <h3>Broly</h3>
+        <h4>Leader: Hassan</h4>
+        <p><b>UID:</b> 2244827951</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment11.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="card-info">
+        <h3>CHANN</h3>
+        <h4>Leader: CHANCHAL BHAI</h4>
+        <p><b>UID:</b> 2384451776</p>
+    </div>
+    <div class="card-image">
+        <span class="payment-label">Payment Proof</span>
+        <img src="payment12.jpg" class="payment-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+    </div>
+  </div>   -->
+
+  <div style="margin-top: 30px;">
+      <button class="animated-button" onclick="window.location.href='index.html'">Back to Home</button>
+  </div>
+
+  <div id="imgModal">
+      <span class="close-btn" onclick="document.getElementById('imgModal').style.display='none'">&times;</span>
+      <img id="fullImage">
+  </div>
+
   <button class="animated-button" onclick="window.location.href='firstour.html'">FIRST TOURNAMENT TEAMS</button>
   <button class="animated-button" onclick="window.location.href='sectour.html'">SECOND TOURNAMENT TEAMS</button>
-  <button class="animated-button" onclick="window.location.href='index.html'">Back to Home</button>
+
+  <script>
+      function openModal(src) {
+          if(!src.includes('placeholder')) {
+            document.getElementById('imgModal').style.display = 'flex';
+            document.getElementById('fullImage').src = src;
+          }
+      }
+  </script>
+
 </body>
 </html>
-
