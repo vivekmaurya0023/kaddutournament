@@ -28,6 +28,30 @@
         .btn-submit { width: 100%; padding: 15px; background: linear-gradient(45deg, #ff0000, #ff4500); border: none; color: white; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; cursor: pointer; border-radius: 30px; box-shadow: 0 0 15px #ff4500; transition: 0.3s; }
         .btn-submit:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
         
+        /* --- NAYA WHATSAPP BUTTON DESIGN --- */
+        .wa-link {
+            display: block;
+            margin: 20px 0;
+            padding: 12px;
+            background: rgba(37, 211, 102, 0.15); /* WhatsApp Green Light */
+            border: 1px solid #25D366;
+            color: #25D366;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .wa-link:hover {
+            background: #25D366;
+            color: black;
+            box-shadow: 0 0 20px #25D366;
+            transform: scale(1.02);
+        }
+
         @keyframes textGlow { from { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4500; } to { text-shadow: 0 0 20px #ff0000, 0 0 40px #ff4500, 0 0 60px #ffcc00; } }
         @keyframes flamePulse { 0% { box-shadow: 0 0 15px #ff0000, 0 0 30px #ff4500; border-color: #fff; } 100% { box-shadow: 0 0 35px #ff0000, 0 0 60px #ffcc00, 0 0 80px orange; border-color: #ffcc00; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
@@ -69,6 +93,11 @@
                     <label style="color: #ffcc00; font-weight: bold;">UPLOAD SCREENSHOT</label>
                     <input type="file" id="paymentScreenshot" accept="image/*" required>
                 </div>
+
+                <a href="https://whatsapp.com/channel/0029VaoO7g14tRrueHNmJ61Z" target="_blank" class="wa-link">
+                    📲 Join WhatsApp Channel <br>
+                    <span style="font-size: 0.7rem; font-weight: normal;">For All Tournament Information <br> & ID Password</span>
+                </a>
 
                 <button type="submit" class="btn-submit">Join Battle</button>
 
@@ -119,7 +148,7 @@
                         Timestamp: new Date().toString()
                     })
                     .then(() => {
-                        alert("✅ Registration Successful! Screenshot Uploaded.");
+                        alert("✅ Registration Successful! Join WhatsApp for ID/Pass.");
                         document.getElementById('tourneyForm').reset();
                     })
                     .catch((error) => {
@@ -136,7 +165,3 @@
 
 </body>
 </html>
-
-
-
-
