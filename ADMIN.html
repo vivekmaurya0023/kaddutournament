@@ -1,131 +1,233 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Tournament Admin Panel</title>
+
     <style>
+
         body { background-color: #121212; color: white; font-family: sans-serif; padding: 20px; }
+
         h1 { text-align: center; color: #ff4500; text-transform: uppercase; letter-spacing: 2px; }
+
         
+
         .container { max-width: 1000px; margin: 0 auto; overflow-x: auto; }
+
         
+
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #1e1e1e; border-radius: 8px; overflow: hidden; }
+
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
+
         th { background-color: #333; color: #ffcc00; }
+
         tr:hover { background-color: #252525; }
+
         
+
         .screenshot-img { width: 100px; height: 100px; object-fit: cover; border: 2px solid #555; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+
         .screenshot-img:hover { transform: scale(1.5); border-color: #fff; }
+
         
+
         .no-data { text-align: center; padding: 20px; color: #777; }
-        .error-msg { text-align: center; padding: 20px; color: #ff4444; font-weight: bold; }
+
         
+
         /* Modal for full image */
+
         #imgModal { display: none; position: fixed; z-index: 99; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
+
         #fullImage { max-width: 90%; max-height: 90%; border: 3px solid white; box-shadow: 0 0 20px #ff4500; }
+
         .close-btn { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
+
     </style>
+
 </head>
+
 <body>
 
+
+
     <h1>🔥 Admin Dashboard 🔥</h1>
+
     
+
     <div class="container">
+
         <table>
+
             <thead>
+
                 <tr>
+
                     <th>Team Name</th>
+
                     <th>Leader UID</th>
+
                     <th>Leader Name</th>
+
                     <th>Payment Screenshot</th>
+
                     <th>Time</th>
+
                 </tr>
+
             </thead>
+
             <tbody id="tableBody">
+
                 <tr>
-                    <td colspan="5" class="no-data" id="statusMsg">Loading Data from Firebase...</td>
+
+                    <td colspan="5" class="no-data">Loading Data...</td>
+
                 </tr>
+
             </tbody>
+
         </table>
+
     </div>
+
+
 
     <div id="imgModal">
+
         <span class="close-btn" onclick="closeModal()">&times;</span>
+
         <img id="fullImage">
+
     </div>
 
+
+
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 
+
+
     <script>
+
+        // --- WAHI SAME CONFIG JO TUMHARI HAI ---
+
         const firebaseConfig = {
+
             apiKey: "AIzaSyC87FgEFqiU-Hxly57h_E1eQfutn2yp6ik",
+
             authDomain: "freefire-tournament-8de8c.firebaseapp.com",
+
             databaseURL: "https://freefire-tournament-8de8c-default-rtdb.asia-southeast1.firebasedatabase.app",
+
             projectId: "freefire-tournament-8de8c",
+
             storageBucket: "freefire-tournament-8de8c.firebasestorage.app",
+
             messagingSenderId: "718786943416",
+
             appId: "1:718786943416:web:403b061404c88b0261d74d",
+
             measurementId: "G-10BF83YEY5"
+
         };
 
+
+
         firebase.initializeApp(firebaseConfig);
+
         const db = firebase.database();
 
-        // Data Fetch Karna with Error Handling
-        const tbody = document.getElementById('tableBody');
-        const statusMsg = document.getElementById('statusMsg');
+
+
+        // Data Fetch Karna
 
         db.ref('registrations').on('value', (snapshot) => {
+
+            const tbody = document.getElementById('tableBody');
+
             tbody.innerHTML = ""; // Purana data saaf karo
 
+
+
             if (snapshot.exists()) {
+
                 const data = snapshot.val();
-                // Data ko reverse kar rahe hain taki latest pehle dikhe
+
+                
+
+                // Object ko Array mein badal ke reverse kar rahe hain taki naya wala upar dikhe
+
                 const entries = Object.entries(data).reverse();
 
+
+
                 entries.forEach(([key, info]) => {
+
                     const row = `
+
                         <tr>
-                            <td style="color: #ffcc00; font-weight: bold;">${info.TeamName || 'N/A'}</td>
-                            <td>${info.LeaderUID || 'N/A'}</td>
-                            <td>${info.LeaderName || 'N/A'}</td>
+
+                            <td style="color: #ffcc00; font-weight: bold;">${info.TeamName}</td>
+
+                            <td>${info.LeaderUID}</td>
+
+                            <td>${info.LeaderName}</td>
+
                             <td>
-                                <img src="${info.PaymentScreenshot || ''}" class="screenshot-img" onerror="this.src='https://via.placeholder.com/100?text=No+Img'" onclick="openModal('${info.PaymentScreenshot}')" alt="Proof">
+
+                                <img src="${info.PaymentScreenshot}" class="screenshot-img" onclick="openModal('${info.PaymentScreenshot}')" alt="Payment Proof">
+
                             </td>
+
                             <td style="font-size: 0.8rem; color: #aaa;">${info.Timestamp ? info.Timestamp.substring(0, 24) : 'N/A'}</td>
+
                         </tr>
+
                     `;
+
                     tbody.innerHTML += row;
+
                 });
+
             } else {
+
                 tbody.innerHTML = '<tr><td colspan="5" class="no-data">Koi registration nahi aaya abhi tak.</td></tr>';
+
             }
-        }, (error) => {
-            // YAHAN HAI MAIN CHEEZ - Agar error aaya toh screen pe dikhega
-            console.error(error);
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="5" class="error-msg">
-                        ❌ Error Loading Data: ${error.message} <br>
-                        <span style="font-size: 0.9rem; color: #fff;">(Tip: Try running this with "Live Server" in VS Code instead of double clicking)</span>
-                    </td>
-                </tr>`;
+
         });
 
+
+
         // Image Badi Karne ka Function
+
         function openModal(imgSrc) {
-            if(imgSrc){
-                document.getElementById('imgModal').style.display = "flex";
-                document.getElementById('fullImage').src = imgSrc;
-            }
+
+            document.getElementById('imgModal').style.display = "flex";
+
+            document.getElementById('fullImage').src = imgSrc;
+
         }
+
+
 
         function closeModal() {
+
             document.getElementById('imgModal').style.display = "none";
+
         }
+
     </script>
 
+
+
 </body>
+
 </html>
