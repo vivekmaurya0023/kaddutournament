@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Free Fire Tournament</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body style="
@@ -18,60 +18,20 @@ align-items:center;
 min-height:100vh;
 ">
 
-<div style="
-width:100%;
-max-width:420px;
-padding:20px;
-box-sizing:border-box;
-">
+<div style="width:100%;max-width:420px;padding:20px;box-sizing:border-box;">
 
-<!-- TITLE -->
 <h1 style="
 text-align:center;
 font-size:2.3rem;
 font-weight:800;
 letter-spacing:3px;
-text-transform:uppercase;
 margin-bottom:20px;
 text-shadow:0 0 15px red;
 ">
 FREE FIRE<br>TOURNAMENT
 </h1>
 
-<!-- STEPS -->
-<div style="
-background:linear-gradient(145deg,rgba(255,69,0,0.15),rgba(0,0,0,0.7));
-border:1px solid #ff4500;
-border-radius:14px;
-padding:15px;
-margin-bottom:25px;
-box-shadow:0 0 15px rgba(255,69,0,0.3);
-font-size:0.85rem;
-line-height:1.6;
-">
-<div style="color:#ffcc00;font-weight:bold;margin-bottom:6px;">⚠️ How To Join</div>
-1️⃣ QR Scan karke ₹50 Pay karo<br>
-2️⃣ Payment Screenshot lo<br>
-3️⃣ Form Fill karo<br>
-4️⃣ WhatsApp Channel Join karo<br>
-5️⃣ Match ID & Password WhatsApp pe milega
-</div>
-
-<!-- IMAGE -->
-<div style="
-width:130px;
-height:130px;
-margin:0 auto 25px;
-border-radius:50%;
-overflow:hidden;
-border:4px solid #ffcc00;
-box-shadow:0 0 25px red;
-">
-<img src="kaddu.jpg" style="width:100%;height:100%;object-fit:cover;">
-</div>
-
-<!-- FORM BOX -->
-<div style="
+<form id="tourneyForm" style="
 background:rgba(255,255,255,0.05);
 border-radius:18px;
 padding:25px;
@@ -79,102 +39,19 @@ border:1px solid rgba(255,69,0,0.4);
 box-shadow:0 0 20px rgba(255,0,0,0.2);
 ">
 
-<form id="tourneyForm">
+<label>Team Name</label>
+<input required style="width:100%;padding:12px;margin:6px 0 14px;background:#000;color:white;border:1px solid #333;border-radius:8px">
 
-<!-- TEAM DETAILS -->
-<div style="color:#ffcc00;font-weight:bold;margin-bottom:12px;">🎮 Team Details</div>
+<label>Leader UID</label>
+<input type="number" required style="width:100%;padding:12px;margin:6px 0 14px;background:#000;color:white;border:1px solid #333;border-radius:8px">
 
-<label style="font-size:0.8rem;color:#ccc;">Team Name</label>
-<input type="text" required placeholder="Example: DARK_WARRIORS"
-style="
-width:100%;
-padding:12px;
-margin:6px 0 16px;
-background:#000;
-border:1px solid #333;
-border-radius:8px;
-color:white;
-">
+<label>In-Game Name</label>
+<input required style="width:100%;padding:12px;margin:6px 0 14px;background:#000;color:white;border:1px solid #333;border-radius:8px">
 
-<label style="font-size:0.8rem;color:#ccc;">Leader UID</label>
-<input type="number" required placeholder="Example: 123456789"
-style="
-width:100%;
-padding:12px;
-margin:6px 0 16px;
-background:#000;
-border:1px solid #333;
-border-radius:8px;
-color:white;
-">
+<label>Payment Screenshot</label>
+<input type="file" accept="image/*" required style="width:100%;padding:10px;margin:6px 0 18px;background:#111;color:white;border-radius:8px">
 
-<label style="font-size:0.8rem;color:#ccc;">Leader In-Game Name</label>
-<input type="text" required placeholder="Example: Killer_007"
-style="
-width:100%;
-padding:12px;
-margin:6px 0 20px;
-background:#000;
-border:1px solid #333;
-border-radius:8px;
-color:white;
-">
-
-<!-- PAYMENT -->
-<div style="color:#ffcc00;font-weight:bold;margin-bottom:10px;">💰 Payment (₹50)</div>
-
-<div style="
-background:rgba(255,255,255,0.08);
-border:1px dashed #ff4500;
-border-radius:12px;
-padding:15px;
-text-align:center;
-margin-bottom:15px;
-">
-<img src="FEE2.png" style="max-width:200px;width:100%;border-radius:8px;">
-<div style="font-size:0.7rem;color:#ffcc00;margin-top:6px;">
-Screenshot lena zaroori hai
-</div>
-</div>
-
-<label style="font-size:0.8rem;color:#ffcc00;">Upload Payment Screenshot</label>
-<input type="file" accept="image/*" required
-style="
-width:100%;
-padding:10px;
-margin:6px 0 18px;
-background:#111;
-border-radius:8px;
-border:1px solid #333;
-color:white;
-">
-
-<!-- WHATSAPP -->
-<a href="https://whatsapp.com/channel/0029VaoO7g14tRrueHNmJ61Z" target="_blank"
-style="
-display:block;
-text-align:center;
-text-decoration:none;
-background:rgba(37,211,102,0.15);
-border:1px solid #25D366;
-color:#25D366;
-padding:12px;
-border-radius:10px;
-font-weight:bold;
-font-size:0.85rem;
-margin-bottom:10px;
-">
-📲 JOIN WHATSAPP CHANNEL<br>
-<span style="font-size:0.7rem;">ID & Password yahin milega</span>
-</a>
-
-<div style="font-size:0.75rem;color:#ff8080;text-align:center;margin-bottom:12px;">
-⚠️ WhatsApp join kiye bina ID/Pass nahi milega
-</div>
-
-<!-- SUBMIT -->
-<button type="submit"
-style="
+<button type="submit" style="
 width:100%;
 padding:14px;
 background:linear-gradient(45deg,red,#ff4500);
@@ -191,8 +68,102 @@ Submit Registration
 
 </form>
 </div>
+
+<!-- POPUP -->
+<div id="popup" style="
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.75);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+">
+  <div style="
+  background:#111;
+  padding:25px 30px;
+  border-radius:15px;
+  box-shadow:0 0 25px red;
+  text-align:center;
+  ">
+    <div id="popupText" style="color:#ffcc00;font-weight:bold">
+      Submitting...
+    </div>
+  </div>
 </div>
+
+<!-- 🔥 FIREBASE + JS (SAB EK HI JAGAH) -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
+
+// 🔥 TERA FIREBASE CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyC87FgEFqiU-Hxly57h_E1eQfutn2yp6ik",
+  authDomain: "freefire-tournament-8de8c.firebaseapp.com",
+  projectId: "freefire-tournament-8de8c",
+  storageBucket: "freefire-tournament-8de8c.appspot.com",
+  messagingSenderId: "718786943416",
+  appId: "1:718786943416:web:403b061404c88b0261d74d"
+};
+
+// INIT
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+// POPUP
+const popup = document.getElementById("popup");
+const popupText = document.getElementById("popupText");
+
+function showPopup(text){
+  popupText.innerText = text;
+  popup.style.display = "flex";
+}
+function hidePopup(){
+  popup.style.display = "none";
+}
+
+// FORM SUBMIT
+document.getElementById("tourneyForm").addEventListener("submit", async (e)=>{
+  e.preventDefault();
+
+  const form = e.target;
+  const teamName = form[0].value;
+  const uid = form[1].value;
+  const ign = form[2].value;
+  const file = form[3].files[0];
+
+  showPopup("Submitting...");
+
+  try{
+    const imgRef = ref(storage, "payments/" + Date.now() + "_" + file.name);
+    await uploadBytes(imgRef, file);
+    const imgURL = await getDownloadURL(imgRef);
+
+    await addDoc(collection(db, "tournament_registrations"), {
+      teamName,
+      leaderUID: uid,
+      leaderIGN: ign,
+      screenshot: imgURL,
+      time: serverTimestamp()
+    });
+
+    showPopup("✅ Registration Successful!");
+    setTimeout(()=>{
+      hidePopup();
+      form.reset();
+    },2000);
+
+  }catch(err){
+    console.error(err);
+    showPopup("❌ Error! Try Again");
+    setTimeout(hidePopup,2000);
+  }
+});
+</script>
 
 </body>
 </html>
-
